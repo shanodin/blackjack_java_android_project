@@ -1,10 +1,12 @@
 package com.example.alice.blackjack;
 
+import java.io.Serializable;
+
 /**
  * Created by alice on 22/09/2017.
  */
 
-public class Card {
+public class Card implements Serializable {
     private CardSuit suit;
     private CardFace face;
 

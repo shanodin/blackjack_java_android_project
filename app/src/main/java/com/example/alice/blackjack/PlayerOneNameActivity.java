@@ -33,6 +33,7 @@ public class PlayerOneNameActivity extends AppCompatActivity {
 
         intent.putExtra("playerOneName", playerOneNameText);
         intent.putExtra("playerOne", playerOne);
+        intent.putExtra("playerAi", playerAi);
 
         startActivity(intent);
     }

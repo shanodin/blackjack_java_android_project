@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".PlayerOneNameActivity" />
         <activity android:name=".PlayerTwoNameActivity" />
-        <activity android:name=".HiLowVsAiActivity"></activity>
+        <activity android:name=".HiLowVsAiActivity" />
+        <activity android:name=".HiLowWinnerActivity"></activity>
     </application>
 
 </manifest>

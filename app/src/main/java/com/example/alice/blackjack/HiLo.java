@@ -1,5 +1,8 @@
 package com.example.alice.blackjack;
 
+import android.util.Log;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -7,13 +10,14 @@ import java.util.Random;
  * Created by alice on 22/09/2017.
  */
 
-public class HiLo implements Game {
+public class HiLo implements Game, Serializable {
     Player[] players;
     ArrayList<Card> deck;
     int level;
 
-    public HiLo(int level, Player... players) {
+    public HiLo(int level, Player ...players) {
         this.players = players;
+        Log.d("players[] -HiLo cons", this.players.toString());
         deck = new ArrayList<>();
         this.generateDeck();
         this.level = level;
@@ -38,7 +42,10 @@ public class HiLo implements Game {
     }
 
     public void play(){
+        Log.d("players[] - play method", this.players.toString());
+        Log.d("2nd player -play method", this.players[1].toString());
         for (Player player : players) {
+            Log.d("player passed to deal", player.toString());
             deal(player);
         }
     }
