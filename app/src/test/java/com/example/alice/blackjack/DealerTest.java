@@ -23,14 +23,21 @@ public class DealerTest {
 
     @Test
     public void testGetAndSetCards() {
-        dealer.setCards(card, card2);
-        assertEquals(2, dealer.getCards().length);
-        assertEquals(card, dealer.getCards()[0]);
+        dealer.addCards(card, card2);
+        assertEquals(2, dealer.getCards().size());
     }
 
     @Test
     public void testGetTotalValue() {
-        dealer.setCards(card, card2);
+        dealer.addCards(card, card2);
+        assertEquals(7, dealer.checkTotal());
+    }
+
+    @Test
+    public void addCardsOneAtATime() {
+        dealer.addCards(card);
+        assertEquals(2, dealer.checkTotal());
+        dealer.addCards(card2);
         assertEquals(7, dealer.checkTotal());
     }
 }

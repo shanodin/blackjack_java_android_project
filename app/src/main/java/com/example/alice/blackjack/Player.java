@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by alice on 22/09/2017.
  */
 
-public class Player implements Serializable {
+public class Player implements Serializable, Playable {
     private String name;
     private Card[] cards;
 

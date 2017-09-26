@@ -5,5 +5,5 @@ package com.example.alice.blackjack;
  */
 
 public interface Game {
-    Player getWinner();
+    Playable getWinner();
 }

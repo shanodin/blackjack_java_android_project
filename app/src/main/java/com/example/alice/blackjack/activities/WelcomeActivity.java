@@ -1,11 +1,13 @@
-package com.example.alice.blackjack;
+package com.example.alice.blackjack.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+
+import com.example.alice.blackjack.R;
+import com.example.alice.blackjack.activities.PlayerOneNameActivity;
 
 public class WelcomeActivity extends AppCompatActivity {
     Button hiLowButton;
