@@ -1,6 +1,7 @@
 package com.example.alice.blackjack;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by alice on 22/09/2017.
@@ -8,21 +9,27 @@ import java.io.Serializable;
 
 public class Player implements Serializable, Playable {
     private String name;
-    private Card[] cards;
+//    private Card[] cards;
+    private ArrayList<Card> playerCards;
 
     public Player(String name){
         this.name = name;
+        this.playerCards = new ArrayList<>();
     }
 
     public String getName() {
         return name;
     }
 
-    public Card[] getCards() {
-        return cards;
+    public ArrayList<Card> getCards() {
+        return playerCards;
     }
 
-    public void setCards(Card... cards) {
-        this.cards = cards;
+    public void addCards(Card... cards) {
+        for (Card card: cards) {
+            playerCards.add(card);
+            System.out.println(card);
+        }
     }
+
 }

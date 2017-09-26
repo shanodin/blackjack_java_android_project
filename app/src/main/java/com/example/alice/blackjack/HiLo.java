@@ -17,7 +17,6 @@ public class HiLo implements Game, Serializable {
 
     public HiLo(int level, Player ...players) {
         this.players = players;
-        Log.d("players[] -HiLo cons", this.players.toString());
         deck = new ArrayList<>();
         this.generateDeck();
         this.level = level;
@@ -38,7 +37,7 @@ public class HiLo implements Game, Serializable {
             int choice = random.nextInt(deck.size());
             cards[i] = deck.remove(choice);
         }
-        player.setCards(cards);
+        player.addCards(cards);
     }
 
     public void play(){

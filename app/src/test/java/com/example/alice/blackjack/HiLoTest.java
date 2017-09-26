@@ -44,27 +44,27 @@ public class HiLoTest {
     @Test
     public void testDealingGivesPlayerCard() {
         hiLo.deal(player1);
-        assertNotNull(player1.getCards()[0]);
+        assertNotNull(player1.getCards());
     }
 
     @Test
     public void testPlayDealsCardsToPlayers() {
         hiLo.play();
-        assertNotEquals(player1.getCards()[0], player2.getCards()[0]);
+        assertNotEquals(player1.getCards(), player2.getCards());
         assertEquals(50, hiLo.getDeck().size());
     }
 
     @Test
     public void testWinnerIsPlayerWithHighestCard() {
-        player1.setCards(new Card(CardSuit.CLUBS, CardFace.FIVE));
-        player2.setCards(new Card(CardSuit.HEARTS, CardFace.THREE));
+        player1.addCards(new Card(CardSuit.CLUBS, CardFace.FIVE));
+        player2.addCards(new Card(CardSuit.HEARTS, CardFace.THREE));
         assertEquals(player1, hiLo.getWinner());
     }
 
     @Test
     public void testWinnerIsNotJustFirstPlayer() {
-        player1.setCards(new Card(CardSuit.DIAMONDS, CardFace.SIX));
-        player2.setCards(new Card(CardSuit.SPADES, CardFace.JACK));
+        player1.addCards(new Card(CardSuit.DIAMONDS, CardFace.SIX));
+        player2.addCards(new Card(CardSuit.SPADES, CardFace.JACK));
         assertEquals(player2, hiLo.getWinner());
     }
 
@@ -76,11 +76,11 @@ public class HiLoTest {
 
     @Test
     public void testWinnerIsPlayerWithHighestCards() {
-        player1.setCards(
+        player1.addCards(
                 new Card(CardSuit.CLUBS, CardFace.FIVE),
                 new Card(CardSuit.HEARTS, CardFace.FOUR)
         );
-        player2.setCards(
+        player2.addCards(
                 new Card(CardSuit.HEARTS, CardFace.THREE),
                 new Card(CardSuit.SPADES, CardFace.JACK)
         );

@@ -12,6 +12,8 @@ import com.example.alice.blackjack.HiLo;
 import com.example.alice.blackjack.Player;
 import com.example.alice.blackjack.R;
 
+import java.util.ArrayList;
+
 public class HiLowVsAiActivity extends AppCompatActivity {
     TextView playerName;
     TextView playerCards;
@@ -47,14 +49,14 @@ public class HiLowVsAiActivity extends AppCompatActivity {
             playerName.setText("Player One");
         }
 
-        Card[] playerOneCards = playerOne.getCards();
-        String pOneCardString = "Card Suit: " + playerOneCards[0].getSuit() +
-                "\n Card Value: " + playerOneCards[0].getFace();
+        ArrayList<Card> playerOneCards = playerOne.getCards();
+        String pOneCardString = "Card Suit: " + playerOneCards.get(0).getSuit() +
+                "\n Card Value: " + playerOneCards.get(0).getFace();
         playerCards.setText(pOneCardString);
 
-        Card[] playerAiCards = playerAi.getCards();
-        String pAiCardString = "Card Suit: " + playerAiCards[0].getSuit() +
-                "\n Card Value: " + playerAiCards[0].getFace();
+        ArrayList<Card> playerAiCards = playerAi.getCards();
+        String pAiCardString = "Card Suit: " + playerAiCards.get(0).getSuit() +
+                "\n Card Value: " + playerAiCards.get(0).getFace();
         aiCards.setText(pAiCardString);
 
         hiLowVsAi.getWinner();
