@@ -28,8 +28,8 @@ public class PlayerOneNameActivity extends AppCompatActivity {
         Intent intent = new Intent(this, HiLowVsAiActivity.class);
         String playerOneNameText = playerOneName.getText().toString();
 
-        Player playerOne =  new Player(playerOneNameText);
-        Player playerAi = new Player("AI");
+        playerOne =  new Player(playerOneNameText);
+        playerAi = new Player("AI");
 
         intent.putExtra("playerOneName", playerOneNameText);
         intent.putExtra("playerOne", playerOne);

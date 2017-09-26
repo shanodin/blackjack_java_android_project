@@ -25,6 +25,7 @@ public class HiLowVsAiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hi_low_vs_ai);
 
         playerName = (TextView) findViewById(R.id.player_one_name_view);
+
         playerCards = (TextView) findViewById(R.id.hi_low_player_cards);
         aiCards = (TextView) findViewById(R.id.hi_low_ai_cards);
         fightButton = (Button) findViewById(R.id.hi_low_fight_btn);
@@ -33,12 +34,16 @@ public class HiLowVsAiActivity extends AppCompatActivity {
         Bundle extras = intent.getExtras();
         playerOne = (Player) intent.getSerializableExtra("playerOne");
         playerAi = (Player) intent.getSerializableExtra("playerAi");
+
         hiLowVsAi = new HiLo(1, playerOne, playerAi);
 
         hiLowVsAi.play();
 
         String playerNameText = extras.getString("playerOneName");
         playerName.setText(playerNameText);
+        if (playerNameText.length() == 0) {
+            playerName.setText("Player One");
+        }
 
         Card[] playerOneCards = playerOne.getCards();
         String pOneCardString = "Card Suit: " + playerOneCards[0].getSuit() +
@@ -49,11 +54,15 @@ public class HiLowVsAiActivity extends AppCompatActivity {
         String pAiCardString = "Card Suit: " + playerAiCards[0].getSuit() +
                 "\n Card Value: " + playerAiCards[0].getFace();
         aiCards.setText(pAiCardString);
+
+        hiLowVsAi.getWinner();
     }
 
     public void onFightButtonClicked(View button) {
         Intent intent = new Intent(this, HiLowWinnerActivity.class);
-        intent.putExtra("game", hiLowVsAi);
+        intent.putExtra("winner", hiLowVsAi.getWinner());
+        intent.putExtra("player", playerOne);
+        intent.putExtra("ai", playerAi);
         startActivity(intent);
     }
 }

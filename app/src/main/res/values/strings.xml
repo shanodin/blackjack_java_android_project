@@ -3,4 +3,6 @@
     <string name="welcome_text">Welcome. Please choose your game:</string>
     <string name="btnHiLow">Play Hi-Low</string>
     <string name="player_one_name">Player 1\'s Name</string>
+    <string name="play_again_btn">Play Again</string>
+    <string name="coming_soon">Features coming soon...</string>
 </resources>

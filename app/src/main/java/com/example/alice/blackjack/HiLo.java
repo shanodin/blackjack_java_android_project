@@ -42,10 +42,7 @@ public class HiLo implements Game, Serializable {
     }
 
     public void play(){
-        Log.d("players[] - play method", this.players.toString());
-        Log.d("2nd player -play method", this.players[1].toString());
         for (Player player : players) {
-            Log.d("player passed to deal", player.toString());
             deal(player);
         }
     }
