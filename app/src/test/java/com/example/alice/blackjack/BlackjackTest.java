@@ -28,7 +28,7 @@ public class BlackjackTest {
     }
 
     @Test
-    public void testGameHas42Cards() {
+    public void testGameHas48Cards() {
         // when initialized blackjack deals out 2 cards per participant
         assertEquals(48, blackjack.getDeck().size());
     }
@@ -36,5 +36,29 @@ public class BlackjackTest {
     @Test
     public void testPlayerHasTwoCards() {
         assertEquals(2, player1.getCards().size());
+        assertEquals(2, dealer.getCards().size());
     }
+
+    @Test
+    public void testDealsCardsToPlayers() {
+        assertEquals(CardFace.ACE, dealer.getCards().get(0).getFace());
+        assertEquals(CardSuit.HEARTS, dealer.getCards().get(0).getSuit());
+    }
+
+    @Test
+    public void testDealer() {
+        assertEquals(dealer, blackjack.getDealer());
+    }
+
+    @Test
+    public void testPlayers() {
+        assertEquals(1, blackjack.getPlayers().length);
+    }
+
+    @Test
+    public void testCardValues() {
+        assertEquals(3, blackjack.cardsCount().get(dealer));
+    }
+
+
 }

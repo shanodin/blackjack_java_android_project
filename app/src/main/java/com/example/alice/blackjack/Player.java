@@ -28,8 +28,15 @@ public class Player implements Serializable, Playable {
     public void addCards(Card... cards) {
         for (Card card: cards) {
             playerCards.add(card);
-            System.out.println(card);
         }
+    }
+
+    public int checkTotal() {
+        int totalCardValue = 0;
+        for (Card card : getCards()) {
+            totalCardValue += card.getFace().getValue();
+        }
+        return totalCardValue;
     }
 
 }

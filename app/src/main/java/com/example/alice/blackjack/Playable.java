@@ -6,4 +6,5 @@ package com.example.alice.blackjack;
 
 public interface Playable {
     void addCards(Card...cards);
+    int checkTotal();
 }

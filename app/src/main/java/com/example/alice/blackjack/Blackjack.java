@@ -3,6 +3,8 @@ package com.example.alice.blackjack;
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -14,12 +16,13 @@ public class Blackjack implements Game, Serializable {
     ArrayList<Playable> participants;
     Player[] players;
     ArrayList<Card> deck;
+    HashMap<Playable, Integer> cardValues;
 
     public Blackjack (Dealer dealer, Player... players) {
         this.participants = new ArrayList<>();
         this.participants.add(dealer);
         this.players = players;
-//        this.participants.add(players);
+        this.dealer = dealer;
         deck = new ArrayList<>();
         this.generateDeck();
         this.addPlayers();
@@ -50,6 +53,10 @@ public class Blackjack implements Game, Serializable {
         }
     }
 
+    public void shuffleDeck(){
+        Collections.shuffle( deck );
+    }
+
     public void addPlayers() {
         for (Player player : this.players) {
             this.participants.add(player);
@@ -57,29 +64,26 @@ public class Blackjack implements Game, Serializable {
     }
 
     public void dealInitial (ArrayList<Playable> participants) {
-        Random random = new Random();
+//        Random random = new Random();
         for (Playable player : participants) {
             Card[] cards = new Card[2];
             for (int i = 0; i < 2; i++) {
-                int choice = random.nextInt(deck.size());
-                Card card = deck.remove(choice);
+//                int choice = random.nextInt(deck.size());
+                Card card = deck.remove(0);
                 cards[i] = card;
             }
             player.addCards(cards);
         }
     }
 
-//    public void dealInitial(ArrayList<Playable> participants) {
-//        Random random = new Random();
-//        ArrayList<Card> cards = new ArrayList<>();
-//        for (Playable participant : participants) {
-//            int choice = random.nextInt(deck.size());
-//
-//        }
-//    }
-
-
-
+    public HashMap cardsCount () {
+        HashMap cardValues = new HashMap<>();
+        for (Playable player : this.participants) {
+            Integer total = player.checkTotal();
+            cardValues.put(player, total);
+        }
+        return cardValues;
+    }
 
 
 

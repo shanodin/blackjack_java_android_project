@@ -36,6 +36,9 @@ public class Dealer implements Playable {
         return totalCardValue;
     }
 
+    public String getName() {
+        return "Dealer";
+    }
 
 
 }
