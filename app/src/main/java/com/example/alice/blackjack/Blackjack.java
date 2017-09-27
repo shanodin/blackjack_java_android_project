@@ -26,7 +26,8 @@ public class Blackjack implements Game, Serializable {
         deck = new ArrayList<>();
         this.generateDeck();
         this.addPlayers();
-        this.dealInitial(participants);
+        // can't deal in the initialize because the deck needs shuffling
+//        this.dealInitial(participants);
     }
 
     public Dealer getDealer() {
@@ -63,6 +64,7 @@ public class Blackjack implements Game, Serializable {
         }
     }
 
+    // deals out in order unless you shuffle first
     public void dealInitial (ArrayList<Playable> participants) {
 //        Random random = new Random();
         for (Playable player : participants) {

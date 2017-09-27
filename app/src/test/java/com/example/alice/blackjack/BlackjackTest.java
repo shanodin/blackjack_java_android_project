@@ -1,6 +1,5 @@
 package com.example.alice.blackjack;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,18 +28,19 @@ public class BlackjackTest {
 
     @Test
     public void testGameHas48Cards() {
-        // when initialized blackjack deals out 2 cards per participant
-        assertEquals(48, blackjack.getDeck().size());
+        assertEquals(52, blackjack.getDeck().size());
     }
 
     @Test
     public void testPlayerHasTwoCards() {
+        blackjack.dealInitial(blackjack.getParticipants());
         assertEquals(2, player1.getCards().size());
         assertEquals(2, dealer.getCards().size());
     }
 
     @Test
     public void testDealsCardsToPlayers() {
+        blackjack.dealInitial(blackjack.getParticipants());
         assertEquals(CardFace.ACE, dealer.getCards().get(0).getFace());
         assertEquals(CardSuit.HEARTS, dealer.getCards().get(0).getSuit());
     }
@@ -57,6 +57,7 @@ public class BlackjackTest {
 
     @Test
     public void testCardValues() {
+        blackjack.dealInitial(blackjack.getParticipants());
         assertEquals(3, blackjack.cardsCount().get(dealer));
     }
 
