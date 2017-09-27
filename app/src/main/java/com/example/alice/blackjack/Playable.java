@@ -12,4 +12,5 @@ public interface Playable {
     int checkTotal();
     ArrayList<Card> getCards();
     void setBlackjack(Boolean blackjack);
+    Boolean getBlackjack();
 }

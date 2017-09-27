@@ -1,6 +1,7 @@
 package com.example.alice.blackjack;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -144,8 +145,9 @@ public class Blackjack implements Game, Serializable {
         for (Map.Entry<Playable, Integer> entry : cardValues.entrySet()) {
             if (entry.getValue() == 21) {
                 Playable player = entry.getKey();
-                if (player.getCards().size() == 2);
-                player.setBlackjack(true);
+                if (player.getCards().size() == 2) {
+                    player.setBlackjack(true);
+                }
                 blackjackParticipants.add(entry.getKey());
                 int index = this.participants.indexOf(entry.getKey());
                 this.participants.remove(index);
@@ -167,9 +169,9 @@ public class Blackjack implements Game, Serializable {
                 }
                 int adjustedScore = entry.getValue() - (aces * 10);
                 if(adjustedScore > 21) {
-                outParticipants.add(entry.getKey());
-                int index = this.participants.indexOf(entry.getKey());
-                this.participants.remove(index);
+                    outParticipants.add(entry.getKey());
+                    int index = this.participants.indexOf(entry.getKey());
+                    this.participants.remove(index);
                 }
             }
         }
@@ -187,29 +189,43 @@ public class Blackjack implements Game, Serializable {
         }
     }
 
-//    public HashMap cardsCountWithAces() {
-//       HashMap<Playable, Integer> newCards = this.cardsCount();
-//        int aceCounter = 0;
-//        for (Playable player : )
-//
-//        return cardsCountWithAces();
-//    }
 
-    public Playable getWinner () {
+    // get a winner by hook or by crook
+    public ArrayList<Playable> getWinner () {
+        ArrayList<Playable> winners = new ArrayList<>();
         if (this.blackjackParticipants.size() > 0 ) {
-            return this.blackjackParticipants.get(0);
-        }
-        int highScore = 0;
-        Playable winner = null;
-        for (Playable player : this.participants){
-            Integer score = new Integer(player.checkTotal());
-            if (score > highScore) {
-                highScore = score;
-                winner = player;
+            for (Playable player : this.blackjackParticipants) {
+                if (player.getBlackjack() == true) {
+                    winners.add(player);
+                }
+            }
+            if (winners.size() > 0) {
+//                return winners;
             }
         }
-        return winner;
+        else {
+            int highScore = 0;
+            Playable winner = null;
+            for (Playable player : this.participants) {
+                Integer score = new Integer(player.checkTotal());
+                if (score > highScore) {
+                    highScore = score;
+//                    winner = player;
+                }
+//              winners.add(winner)
+            }
+            for (Playable player : this.participants) {
+                if (player.checkTotal() >= highScore) {
+                    winners.add(player);
+                }
+            }
+                if (winners.size() > 0 ) {
+//                return winners;
+            }
+        }
+        return winners;
     }
+
 
     public void setupGame () {
         // shuffle
@@ -218,9 +234,23 @@ public class Blackjack implements Game, Serializable {
         this.dealCards(2);
     }
 
-    public void gameRound() {
-
-    }
+//    public ArrayList<Playable> gameRound() {
+//        // check scores
+//        this.cardsCount();
+//        // sort out bust/blackjack
+//        this.checkForBlackjackOrBust();
+//        // check any players remain
+//        if (this.getParticipants().size() == 0) {
+//            getWinner();
+//        }
+//        // something something pass
+////        if (String "someCondition" .equals(false);{
+////            return getWinner();
+////        }
+//        // deal cards to in players
+//        this.dealCards(1);
+//        return null;
+//    }
 
 
 

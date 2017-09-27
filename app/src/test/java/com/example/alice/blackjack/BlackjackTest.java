@@ -1,9 +1,13 @@
 package com.example.alice.blackjack;
 
+import android.util.Log;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 /**
  * Created by alice on 26/09/2017.
@@ -116,5 +120,78 @@ public class BlackjackTest {
         assertEquals(1, blackjack.getParticipants().size());
     }
 
+    @Test
+    public void testTrueBlackjack() {
+        player1.addCards(
+                new Card(CardSuit.CLUBS, CardFace.ACE),
+                new Card(CardSuit.CLUBS, CardFace.KING) );
+        dealer.addCards(
+                new Card(CardSuit.HEARTS, CardFace.ACE),
+                new Card(CardSuit.DIAMONDS, CardFace.FIVE),
+                new Card(CardSuit.SPADES, CardFace.FIVE) );
+        blackjack.checkForBlackjackOrBust();
+        assertTrue(player1.getBlackjack());
+        assertFalse(dealer.getBlackjack());
+    }
 
+    @Test
+    public void testGetWinner() {
+        dealer.addCards(
+                new Card(CardSuit.HEARTS, CardFace.KING),
+                new Card(CardSuit.DIAMONDS, CardFace.KING),
+                new Card(CardSuit.DIAMONDS, CardFace.EIGHT));
+        player1.addCards(
+                new Card(CardSuit.CLUBS, CardFace.ACE),
+                new Card(CardSuit.CLUBS, CardFace.KING) );
+        player2.addCards(
+                new Card(CardSuit.SPADES, CardFace.EIGHT),
+                new Card(CardSuit.CLUBS, CardFace.FOUR) );
+        player3.addCards(
+                new Card(CardSuit.SPADES, CardFace.TWO),
+                new Card(CardSuit.DIAMONDS, CardFace.THREE));
+        blackjack2.checkForBlackjackOrBust();
+        assertEquals(player1, blackjack2.getWinner().get(0));
+    }
+
+    @Test
+    public void testDifferentWinner() {
+        dealer.addCards(
+                new Card(CardSuit.HEARTS, CardFace.KING),
+                new Card(CardSuit.DIAMONDS, CardFace.KING),
+                new Card(CardSuit.DIAMONDS, CardFace.EIGHT));
+        player1.addCards(
+                new Card(CardSuit.CLUBS, CardFace.ACE),
+                new Card(CardSuit.CLUBS, CardFace.TWO) );
+        player2.addCards(
+                new Card(CardSuit.SPADES, CardFace.EIGHT),
+                new Card(CardSuit.CLUBS, CardFace.SEVEN) );
+        player3.addCards(
+                new Card(CardSuit.SPADES, CardFace.TWO),
+                new Card(CardSuit.DIAMONDS, CardFace.THREE));
+        blackjack2.checkForBlackjackOrBust();
+        assertEquals(player2, blackjack2.getWinner().get(0));
+    }
+
+    @Test
+    public void testEveryoneBust() {
+        dealer.addCards(
+                new Card(CardSuit.HEARTS, CardFace.KING),
+                new Card(CardSuit.DIAMONDS, CardFace.KING),
+                new Card(CardSuit.DIAMONDS, CardFace.EIGHT));
+        player1.addCards(
+                new Card(CardSuit.CLUBS, CardFace.TEN),
+                new Card(CardSuit.HEARTS, CardFace.TEN),
+                new Card(CardSuit.CLUBS, CardFace.TWO) );
+        player2.addCards(
+                new Card(CardSuit.SPADES, CardFace.EIGHT),
+                new Card(CardSuit.SPADES, CardFace.EIGHT),
+                new Card(CardSuit.CLUBS, CardFace.SEVEN) );
+        player3.addCards(
+                new Card(CardSuit.SPADES, CardFace.TWO),
+                new Card(CardSuit.SPADES, CardFace.EIGHT),
+                new Card(CardSuit.SPADES, CardFace.EIGHT),
+                new Card(CardSuit.DIAMONDS, CardFace.THREE));
+        blackjack2.checkForBlackjackOrBust();
+        assertEquals(0, blackjack2.getWinner().size());
+    }
 }

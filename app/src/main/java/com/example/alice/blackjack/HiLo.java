@@ -46,9 +46,9 @@ public class HiLo implements Game, Serializable {
         }
     }
 
-    public Player getWinner() {
+    public ArrayList<Playable> getWinner() {
         int maximum = 0;
-        Player winner = null;
+        ArrayList<Playable> winners = new ArrayList<>();
         for (int i = 0; i < players.length; i++) {
             int totalCardValue = 0;
             for (Card card : players[i].getCards()) {
@@ -56,10 +56,10 @@ public class HiLo implements Game, Serializable {
             }
             if (totalCardValue > maximum) {
                 maximum = totalCardValue;
-                winner = players[i];
+                winners.add(players[i]);
             }
         }
-        return winner;
+        return winners;
     }
 
     public Player[] getPlayers() {
