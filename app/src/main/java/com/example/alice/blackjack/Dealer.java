@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class Dealer implements Playable {
     private ArrayList<Card> dealerCards;
-//    private Card[] cards;
 
     public Dealer() {
         this.dealerCards = new ArrayList<>();
@@ -23,10 +22,6 @@ public class Dealer implements Playable {
             dealerCards.add(card);
         }
     }
-
-//    public void addCards (Card...cards) {
-//        this.cards.
-//    }
 
     public int checkTotal() {
         int totalCardValue = 0;
