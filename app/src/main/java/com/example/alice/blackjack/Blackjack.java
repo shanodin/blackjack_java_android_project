@@ -102,33 +102,50 @@ public class Blackjack implements Game, Serializable {
     }
 
     // separate players with a blackjack or who are bust
+    // refactored into separate methods which are brought together here
     public void checkForBlackjackOrBust () {
-        this.blackjackParticipants = new ArrayList<>();
-        this.outParticipants = new ArrayList<>();
-        HashMap<Playable, Integer> cardValues =  this.cardsCount();
-//        Set<Map.Entry<Playable, Integer>> entrySet = cardValues.entrySet();
-//        for (Map.Entry<Playable, Integer> entry : entrySet) {
-        for (Map.Entry<Playable, Integer> entry : cardValues.entrySet()) {
-            if (entry.getValue() > 21) {
-                //count the number of aces
-                Playable player = entry.getKey();
-                int aces = 0;
-                for (Card card : player.getCards() ){
-                    if (card.getFace() .equals(CardFace.ACE)) {
-                        aces++;
-                    }
-                }
+        this.checkForBlackjack();
+        this.checkForBust();
+//        this.blackjackParticipants = new ArrayList<>();
+//        this.outParticipants = new ArrayList<>();
+//        HashMap<Playable, Integer> cardValues =  this.cardsCount();
+////        Set<Map.Entry<Playable, Integer>> entrySet = cardValues.entrySet();
+////        for (Map.Entry<Playable, Integer> entry : entrySet) {
+//        for (Map.Entry<Playable, Integer> entry : cardValues.entrySet()) {
+//            if (entry.getValue() > 21) {
+//                //count the number of aces
+//                Playable player = entry.getKey();
+//                int aces = 0;
+//                for (Card card : player.getCards() ){
+//                    if (card.getFace() .equals(CardFace.ACE)) {
+//                        aces++;
+//                    }
+//                }
+//                // remove the number of aces times ten from your score.
+//                int adjustedScore = entry.getValue() - (aces * 10);
+//                //if this adjusted score is still greater than 21 then do the moving to out.
+//                if(adjustedScore > 21) {
+//                    outParticipants.add(entry.getKey());
+//                    int index = this.participants.indexOf(entry.getKey());
+//                    this.participants.remove(index);
+//                }
+//            }
+//            if (entry.getValue() == 21){
+//                blackjackParticipants.add(entry.getKey());
+//                int index = this.participants.indexOf(entry.getKey());
+//                this.participants.remove(index);
+//            }
+//        }
+    }
 
-                // remove the number of aces times ten from your score.
-                int adjustedScore = entry.getValue() - (aces * 10);
-                //if this adjusted score is still greater than 21 then do the moving to out.
-                if(adjustedScore > 21) {
-                    outParticipants.add(entry.getKey());
-                    int index = this.participants.indexOf(entry.getKey());
-                    this.participants.remove(index);
-                }
-            }
-            if (entry.getValue() == 21){
+    public void checkForBlackjack() {
+        this.blackjackParticipants = new ArrayList<>();
+        HashMap<Playable, Integer> cardValues =  this.cardsCount();
+        for (Map.Entry<Playable, Integer> entry : cardValues.entrySet()) {
+            if (entry.getValue() == 21) {
+                Playable player = entry.getKey();
+                if (player.getCards().size() == 2);
+                player.setBlackjack(true);
                 blackjackParticipants.add(entry.getKey());
                 int index = this.participants.indexOf(entry.getKey());
                 this.participants.remove(index);
@@ -136,25 +153,27 @@ public class Blackjack implements Game, Serializable {
         }
     }
 
-//    public void checkForBust() {
-//        this.outParticipants = new ArrayList<>();
-//        HashMap<Playable, Integer> cardValues =  this.cardsCount();
-//        for (Map.Entry<Playable, Integer> entry : cardValues.entrySet()) {
-//            if (entry.getValue() > 21) {
-////                Playable player = entry.getKey();
-////                int aces = 0;
-////                for (Card card : player.getCards() ){
-////                    if (card.getFace() .equals(CardFace.ACE)) {
-////                        aces++;
-////                    }
-//                }
-//                outParticipants.add(entry.getKey());
-//                int index = this.participants.indexOf(entry.getKey());
-//                this.participants.remove(index);
-//            }
-//        }
-//
-//    }
+    public void checkForBust() {
+        this.outParticipants = new ArrayList<>();
+        HashMap<Playable, Integer> cardValues =  this.cardsCount();
+        for (Map.Entry<Playable, Integer> entry : cardValues.entrySet()) {
+            if (entry.getValue() > 21) {
+                Playable player = entry.getKey();
+                int aces = 0;
+                for (Card card : player.getCards() ){
+                    if (card.getFace() .equals(CardFace.ACE)) {
+                        aces++;
+                    }
+                }
+                int adjustedScore = entry.getValue() - (aces * 10);
+                if(adjustedScore > 21) {
+                outParticipants.add(entry.getKey());
+                int index = this.participants.indexOf(entry.getKey());
+                this.participants.remove(index);
+                }
+            }
+        }
+    }
 
     // deal cards from the 'top' of the deck - not random unless shuffled
     public void dealCards(int cardsToDeal) {
@@ -168,7 +187,6 @@ public class Blackjack implements Game, Serializable {
         }
     }
 
-    // if time, change behaviour for Aces
 //    public HashMap cardsCountWithAces() {
 //       HashMap<Playable, Integer> newCards = this.cardsCount();
 //        int aceCounter = 0;
@@ -200,7 +218,9 @@ public class Blackjack implements Game, Serializable {
         this.dealCards(2);
     }
 
+    public void gameRound() {
 
+    }
 
 
 

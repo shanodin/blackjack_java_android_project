@@ -8,9 +8,19 @@ import java.util.ArrayList;
 
 public class Dealer implements Playable {
     private ArrayList<Card> dealerCards;
+    private Boolean blackjack;
 
     public Dealer() {
         this.dealerCards = new ArrayList<>();
+        this.blackjack = false;
+    }
+
+    public Boolean getBlackjack() {
+        return blackjack;
+    }
+
+    public void setBlackjack(Boolean blackjack) {
+        this.blackjack = blackjack;
     }
 
     public ArrayList<Card> getCards() {

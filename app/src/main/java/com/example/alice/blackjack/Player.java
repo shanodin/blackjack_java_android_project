@@ -9,12 +9,21 @@ import java.util.ArrayList;
 
 public class Player implements Serializable, Playable {
     private String name;
-//    private Card[] cards;
     private ArrayList<Card> playerCards;
+    private Boolean blackjack;
 
     public Player(String name){
         this.name = name;
         this.playerCards = new ArrayList<>();
+        this.blackjack = false;
+    }
+
+    public Boolean getBlackjack() {
+        return blackjack;
+    }
+
+    public void setBlackjack(Boolean blackjack) {
+        this.blackjack = blackjack;
     }
 
     public String getName() {
