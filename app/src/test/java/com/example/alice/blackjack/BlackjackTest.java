@@ -150,11 +150,11 @@ public class BlackjackTest {
                 new Card(CardSuit.SPADES, CardFace.TWO),
                 new Card(CardSuit.DIAMONDS, CardFace.THREE));
         blackjack2.checkForBlackjackOrBust();
-        assertEquals(player1, blackjack2.getWinner().get(0));
+        assertEquals(3, blackjack2.getWinner().size());
     }
 
     @Test
-    public void testDifferentWinner() {
+    public void testDealerBustEveryoneWins() {
         dealer.addCards(
                 new Card(CardSuit.HEARTS, CardFace.KING),
                 new Card(CardSuit.DIAMONDS, CardFace.KING),
@@ -169,7 +169,7 @@ public class BlackjackTest {
                 new Card(CardSuit.SPADES, CardFace.TWO),
                 new Card(CardSuit.DIAMONDS, CardFace.THREE));
         blackjack2.checkForBlackjackOrBust();
-        assertEquals(player2, blackjack2.getWinner().get(0));
+        assertEquals(3, blackjack2.getWinner().size());
     }
 
     @Test
@@ -190,8 +190,35 @@ public class BlackjackTest {
                 new Card(CardSuit.SPADES, CardFace.TWO),
                 new Card(CardSuit.SPADES, CardFace.EIGHT),
                 new Card(CardSuit.SPADES, CardFace.EIGHT),
-                new Card(CardSuit.DIAMONDS, CardFace.THREE));
+                new Card(CardSuit.DIAMONDS, CardFace.FOUR));
         blackjack2.checkForBlackjackOrBust();
         assertEquals(0, blackjack2.getWinner().size());
+    }
+//
+    @Test
+    public void testGetADifferentWinner(){
+        dealer.addCards(
+                new Card(CardSuit.HEARTS, CardFace.KING),
+                new Card(CardSuit.DIAMONDS, CardFace.KING),
+                new Card(CardSuit.DIAMONDS, CardFace.EIGHT));
+        player1.addCards(
+                new Card(CardSuit.CLUBS, CardFace.FIVE),
+                new Card(CardSuit.HEARTS, CardFace.TEN),
+                new Card(CardSuit.CLUBS, CardFace.TWO) );
+        blackjack.checkForBlackjackOrBust();
+        assertEquals(player1, blackjack.getWinner().get(0));
+    }
+
+    @Test
+    public void testGetDealerWinner(){
+        dealer.addCards(
+                new Card(CardSuit.DIAMONDS, CardFace.KING),
+                new Card(CardSuit.DIAMONDS, CardFace.EIGHT));
+        player1.addCards(
+                new Card(CardSuit.CLUBS, CardFace.FIVE),
+                new Card(CardSuit.HEARTS, CardFace.TEN),
+                new Card(CardSuit.CLUBS, CardFace.TWO) );
+        blackjack.checkForBlackjackOrBust();
+        assertEquals(dealer, blackjack.getWinner().get(0));
     }
 }

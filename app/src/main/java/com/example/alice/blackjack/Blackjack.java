@@ -107,36 +107,6 @@ public class Blackjack implements Game, Serializable {
     public void checkForBlackjackOrBust () {
         this.checkForBlackjack();
         this.checkForBust();
-//        this.blackjackParticipants = new ArrayList<>();
-//        this.outParticipants = new ArrayList<>();
-//        HashMap<Playable, Integer> cardValues =  this.cardsCount();
-////        Set<Map.Entry<Playable, Integer>> entrySet = cardValues.entrySet();
-////        for (Map.Entry<Playable, Integer> entry : entrySet) {
-//        for (Map.Entry<Playable, Integer> entry : cardValues.entrySet()) {
-//            if (entry.getValue() > 21) {
-//                //count the number of aces
-//                Playable player = entry.getKey();
-//                int aces = 0;
-//                for (Card card : player.getCards() ){
-//                    if (card.getFace() .equals(CardFace.ACE)) {
-//                        aces++;
-//                    }
-//                }
-//                // remove the number of aces times ten from your score.
-//                int adjustedScore = entry.getValue() - (aces * 10);
-//                //if this adjusted score is still greater than 21 then do the moving to out.
-//                if(adjustedScore > 21) {
-//                    outParticipants.add(entry.getKey());
-//                    int index = this.participants.indexOf(entry.getKey());
-//                    this.participants.remove(index);
-//                }
-//            }
-//            if (entry.getValue() == 21){
-//                blackjackParticipants.add(entry.getKey());
-//                int index = this.participants.indexOf(entry.getKey());
-//                this.participants.remove(index);
-//            }
-//        }
     }
 
     public void checkForBlackjack() {
@@ -189,42 +159,47 @@ public class Blackjack implements Game, Serializable {
         }
     }
 
+    public void dealToOne(Playable participant){
+        Card card = deck.remove(0);
+        participant.addCards(card);
+    }
+
 
     // get a winner by hook or by crook
-    public ArrayList<Playable> getWinner () {
-        ArrayList<Playable> winners = new ArrayList<>();
-        if (this.blackjackParticipants.size() > 0 ) {
-            for (Playable player : this.blackjackParticipants) {
-                if (player.getBlackjack() == true) {
-                    winners.add(player);
-                }
-            }
-            if (winners.size() > 0) {
-//                return winners;
-            }
-        }
-        else {
-            int highScore = 0;
-            Playable winner = null;
-            for (Playable player : this.participants) {
-                Integer score = new Integer(player.checkTotal());
-                if (score > highScore) {
-                    highScore = score;
-//                    winner = player;
-                }
-//              winners.add(winner)
-            }
-            for (Playable player : this.participants) {
-                if (player.checkTotal() >= highScore) {
-                    winners.add(player);
-                }
-            }
-                if (winners.size() > 0 ) {
-//                return winners;
-            }
-        }
-        return winners;
-    }
+//    public ArrayList<Playable> getWinner () {
+//        ArrayList<Playable> winners = new ArrayList<>();
+//        if (this.blackjackParticipants.size() > 0 ) {
+//            for (Playable player : this.blackjackParticipants) {
+//                if (player.getBlackjack() == true) {
+//                    winners.add(player);
+//                }
+//            }
+//        }
+////            if (winners.size() > 0) {
+////                return winners;
+////            }
+//        else {
+//            int highScore = 0;
+//            Playable winner = null;
+//            for (Playable player : this.participants) {
+//                Integer score = new Integer(player.checkTotal());
+//                if (score > highScore) {
+//                    highScore = score;
+////                    winner = player;
+//                }
+////              winners.add(winner)
+//            }
+//            for (Playable player : this.participants) {
+//                if (player.checkTotal() >= highScore) {
+//                    winners.add(player);
+//                }
+//            }
+//                if (winners.size() > 0 ) {
+////                return winners;
+//            }
+//        }
+//        return winners;
+//    }
 
 
     public void setupGame () {
@@ -252,6 +227,30 @@ public class Blackjack implements Game, Serializable {
 //        return null;
 //    }
 
+    public ArrayList<Playable> getWinner() {
+        int dealerScore = this.dealer.checkTotal();
+        ArrayList<Playable> winners = new ArrayList<>();
+        if (this.dealer.getBlackjack() == true) {
+            winners.add(dealer);
+            return winners;
+        }
+        if (outParticipants.contains(dealer)){
+            winners.addAll(blackjackParticipants);
+            winners.addAll(participants);
+            return winners;
+        }
+        for (Playable player : participants) {
+            int playerScore = player.checkTotal();
+            if (playerScore > dealerScore) {
+                winners.add(player);
+            }
+            if (winners.size() == 0){
+                winners.add(dealer);
+            }
+            return winners;
+        }
+        return winners;
+    }
 
 
 }
